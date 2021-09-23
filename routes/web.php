@@ -30,6 +30,8 @@ Route::post('auth1', [formLoginController::class, 'login'])->name('auth1');
 
 Route::post('comment', [pedidoController::class, 'comment'])->name('pedido.comment');
 
+Route::post('nota', [pedidoController::class, 'asunto'])->name('nota');
+
 Route::post('edit', [operadorController::class, 'edit'])->name('edit');
 
 Route::post('delete', [operadorController::class, 'delete'])->name('delete');

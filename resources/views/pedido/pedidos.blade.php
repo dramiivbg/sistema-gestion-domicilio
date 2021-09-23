@@ -36,7 +36,7 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.sanchez</a></li>
+        
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
@@ -45,13 +45,17 @@
 
 
    
-  <div class="flexp ">
+  
+
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="well well-sm">
     
     <form  method="POST" action="{{route('cambiar-estado')}}">
 
       @csrf
    
-    <ion-icon name="briefcase"></ion-icon>
   
   <br>
   <br>
@@ -101,6 +105,10 @@
 
     </form>
         </div>
+          </div>
+      </div>
+    </div>
+  
     
        
     

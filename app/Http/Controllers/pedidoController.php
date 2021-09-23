@@ -23,9 +23,12 @@ class pedidoController extends Controller
    public function home_domiciliario(){
 
 
+      $id1 =  request()->session()->all();
    
 
-     return  view('pedido.show');
+      $domiciliario = Operadore::find($id1['id']);
+
+     return  view('pedido.show', compact('domiciliario'));
 
 
 
@@ -122,7 +125,7 @@ class pedidoController extends Controller
     foreach($pedidos as $pedido){
 
 
-        if($pedido->estado == 'aplazado'){
+        if($pedido->estado == 'aplazado' && empty($pedido->motivo_incumplimiento)){
 
 
 
@@ -143,9 +146,46 @@ class pedidoController extends Controller
    public function comment(){
 
 
-      $pedido = request();
 
-      return view('pedido.comment', compact('pedido'));
+      $id_pedido = request('id');
+
+      
+       $id1 =  request()->session()->all();
+
+      
+
+       request()->session()->put(['num_pedido' => $id_pedido]);
+
+
+     
+       $domiciliario = Operadore::find($id1['id']);
+
+   
+       return view('pedido.comment', compact('domiciliario'));
+   }
+
+
+   public function asunto(){
+
+
+
+      request()->validate([
+
+         'motivo' => 'required'
+      ]);
+
+      $id =  request()->session()->all();
+
+      
+
+    $pedido =    Pedido::where('num_pedido', $id['num_pedido'])->update(['motivo_incumplimiento' => request('motivo')]);
+
+
+    if($pedido){
+
+      return redirect()->route('pedido.aplazado');
+    }
+
    }
 
 }

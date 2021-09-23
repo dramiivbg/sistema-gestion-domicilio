@@ -31,10 +31,12 @@
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
         <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
        
+        <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
+       
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.sanchez</a></li>
+       
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
@@ -47,9 +49,8 @@
     
     
 
-      @csrf
    
-    <ion-icon name="briefcase"></ion-icon>
+  
   
   <br>
   <br>
@@ -58,7 +59,10 @@
   @foreach ($new_pedidos as $pedido )
 
 
-  <form  method="POST" action="{{route('pedido.comment', $new_pedidos)}}">
+  <form  method="POST" action="{{route('pedido.comment', $pedido)}}">
+
+
+    @csrf
 
   <p> <strong>N° pedido <br> 
     

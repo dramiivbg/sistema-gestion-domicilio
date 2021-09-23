@@ -3,7 +3,7 @@
 
 @extends('layout.plantilla')
 
-@section('title','pedidos')
+@section('title','comment')
 
 @section('head')
 
@@ -16,6 +16,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/pedido.scss">
+
     
 @endsection
 
@@ -36,7 +37,13 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.sanchez</a></li>
+        
+
+          <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.{{$domiciliario->nombre_completo}}</a></li>
+              
+              
+          
+        
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
@@ -52,7 +59,7 @@
   
   
     
-    <form  method="POST" action="" >
+    <form  method="POST" class="form-horizontal" action="{{route('nota')}}" >
 
      
         @csrf
@@ -65,25 +72,34 @@
         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
         <div class="col-md-8">
          
-           
+           <label for="">motivo de aplazo</label><br>
 
-            <textarea name="nota" id="" cols="30" rows="10">
+            <textarea name="motivo" id="" cols="60" rows="15">
 
+                
               
             </textarea>
          
             <br>
-            {!! $errors->first('nota','<small>:message</small><br>') !!}
+            {!! $errors->first('motivo','<small>:message</small><br>') !!}
         
         </div>
-    </div>
+    </div><br>
+
+    <div class="center1">
+        <div class="form-group">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+        </div>
+            </div>
 
   
 
 
  
 
-  <button type="submit" class="btn btn-primary btn-lg">enviar</button>
+
 
     </form>
         
