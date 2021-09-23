@@ -47,70 +47,55 @@
    
   <div class="flexp ">
     
-    <form  method="POST" action="{{route('cambiar-estado')}}">
+    
 
-      @csrf
+  
+  
+    
+    <form  method="POST" action="" >
+
+     
+        @csrf
    
-    <ion-icon name="briefcase"></ion-icon>
-  
-  <br>
-  <br>
   
   
-  @foreach ($new_pedidos as $pedido )
+      <div class="form-group">
+
+
+        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+        <div class="col-md-8">
+         
+           
+
+            <textarea name="nota" id="" cols="30" rows="10">
+
+              
+            </textarea>
+         
+            <br>
+            {!! $errors->first('nota','<small>:message</small><br>') !!}
+        
+        </div>
+    </div>
+
+  
 
 
  
 
-  <p> <strong>N° pedido <br> 
-    
-    <input type="text" name="id" value="{{$pedido->num_pedido}}" readonly>
-    
-    </strong>
-    </p>
-    
-    
-    
-    <p> direccion: {{
-    
-    $pedido->direccion
-    
-    }}</p>
-    
-    
-    <p>telefono: {{
-    
-    $pedido->telefono_comprador
-    
-    }}</p>
-  
-    <p>fecha de entrega: {{
-    
-    $pedido->fecha_entrega
-    
-    }}</p>
-    
-  <select name="estado"  >
-
-    <option ></option>
-    <option   value="entregado">entregado</option>
-    <option  value="aplazado">aplazado</option>
-  </select><br><br>
-
   <button type="submit" class="btn btn-primary btn-lg">enviar</button>
 
     </form>
-        </div>
-    
+        
        
-    
+  </div> 
     
       
     
   
   
       
-  @endforeach
+
 
     
 

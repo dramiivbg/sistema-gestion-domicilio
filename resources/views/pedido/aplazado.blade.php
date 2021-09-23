@@ -29,9 +29,7 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
-       
-        <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
+        <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
        
         
       </ul>
@@ -47,7 +45,7 @@
    
   <div class="flexp ">
     
-    <form  method="POST" action="{{route('cambiar-estado')}}">
+    
 
       @csrf
    
@@ -60,7 +58,7 @@
   @foreach ($new_pedidos as $pedido )
 
 
- 
+  <form  method="POST" action="{{route('pedido.comment', $new_pedidos)}}">
 
   <p> <strong>N° pedido <br> 
     
@@ -90,17 +88,20 @@
     
     }}</p>
     
-  <select name="estado"  >
+</p>
+  
+<p>estado: {{
 
-    <option ></option>
-    <option   value="entregado">entregado</option>
-    <option  value="aplazado">aplazado</option>
-  </select><br><br>
+$pedido->estado
 
-  <button type="submit" class="btn btn-primary btn-lg">enviar</button>
+}}</p>
 
-    </form>
-        </div>
+
+<button type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
+
+  </form>
+
+</div>
     
        
     

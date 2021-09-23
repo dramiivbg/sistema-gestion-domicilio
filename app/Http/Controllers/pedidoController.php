@@ -108,4 +108,44 @@ class pedidoController extends Controller
 
    }
    
+
+
+
+   public function pedidos_aplazados(){
+
+      $id =  request()->session()->all();
+
+    $pedidos = Pedido::where('id_domiciliario', $id['id'])->get();
+
+    $new_pedidos = [];
+
+    foreach($pedidos as $pedido){
+
+
+        if($pedido->estado == 'aplazado'){
+
+
+
+         for($i = 0; $i< sizeof($pedidos); $i++){
+
+            $new_pedidos[$i] = $pedido;
+         }
+
+        }
+    }
+
+    return view('pedido.aplazado', compact('new_pedidos'));
+
+
+   }
+
+
+   public function comment(){
+
+
+      $pedido = request();
+
+      return view('pedido.comment', compact('pedido'));
+   }
+
 }

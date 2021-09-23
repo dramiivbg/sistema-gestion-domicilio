@@ -9,9 +9,13 @@ class homeController extends Controller
 {
     public function home(){
 
+
+       
+
         $id =  request()->session()->all();
 
 
+       
         $domiciliario = Operadore::find($id['id']);
         
 

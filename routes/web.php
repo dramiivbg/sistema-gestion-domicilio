@@ -6,6 +6,7 @@ use App\Http\Controllers\formOperadorController;
 use App\Http\Controllers\formPedidoController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\operadorController;
 use App\Http\Controllers\pedidoController;
 use App\Models\Pedido;
 use Illuminate\Support\Facades\Route;
@@ -24,11 +25,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'home'])->name('home');
 
-Route::post('auth1', [formLoginController::class, 'login'])->name('auth1');
+Route::post('auth1', [formLoginController::class, 'login'])->name('auth1'); 
+
+
+Route::post('comment', [pedidoController::class, 'comment'])->name('pedido.comment');
+
+Route::post('edit', [operadorController::class, 'edit'])->name('edit');
+
+Route::post('delete', [operadorController::class, 'delete'])->name('delete');
 
 Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show');
 
 Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('pedido.pedidos');
+
+
+Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('pedido.aplazado');
+
+Route::get('list-pedidos', [operadorController::class, 'list'])->name('operador.list');
 
 Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('pedido.entregado');
 
