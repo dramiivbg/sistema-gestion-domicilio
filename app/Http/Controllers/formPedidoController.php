@@ -20,7 +20,7 @@ class formPedidoController extends Controller
             'email_comprador' => 'required|email',
             'fecha_llegada' => 'required|date',
             'fecha_entregada' => 'required|date',
-            'estado' => 'required',
+          
             'domiciliario' => 'required'
 
         ]);
@@ -37,7 +37,7 @@ class formPedidoController extends Controller
         'telefono_vendedor' => request('telefono_vendedor'),
         'email_vendedor' => request('email_vendedor')
         ,'email_comprador' => request('email_comprador'),
-        'estado' => request('estado'),
+        'estado' => null,
         'fecha_llegada' => request('fecha_llegada'),
         'fecha_entrega' => request('fecha_entregada')
       ]);

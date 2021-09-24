@@ -33,6 +33,7 @@
        
         <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
        
+        <li class="active"><a href="{{route('pedido.camino')}}">pedidos en camino</a></li>
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -46,7 +47,7 @@
 
    
   
-
+  <div class="flexp ">
     <div class="container">
       <div class="row">
           <div class="col-md-12">
@@ -96,7 +97,7 @@
     
   <select name="estado"  >
 
-    <option ></option>
+    <option   value="en camino">camino</option>
     <option   value="entregado">entregado</option>
     <option  value="aplazado">aplazado</option>
   </select><br><br>
@@ -109,7 +110,7 @@
       </div>
     </div>
   
-    
+  </div> 
        
     
     

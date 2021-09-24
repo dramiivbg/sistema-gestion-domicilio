@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\emailController;
 use App\Http\Controllers\formChangeController;
 use App\Http\Controllers\formLoginController;
 use App\Http\Controllers\formOperadorController;
@@ -8,8 +9,12 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\operadorController;
 use App\Http\Controllers\pedidoController;
+use App\Mail\email;
 use App\Models\Pedido;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+  
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +34,7 @@ Route::get('/', [homeController::class, 'home'])->name('home');
 
 
 
+
 Route::post('auth1', [formLoginController::class, 'login'])->name('auth1'); 
 
 
@@ -36,9 +42,9 @@ Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.commen
 
 Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto');
 
-Route::post('edit', [operadorController::class, 'edit'])->name('edit');
+Route::get('edit', [operadorController::class, 'edit'])->name('edit');
 
-Route::post('delete', [operadorController::class, 'delete'])->name('delete');
+Route::get('delete', [operadorController::class, 'delete'])->name('delete');
 
 Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show');
 
@@ -50,6 +56,8 @@ Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])-
 Route::get('list-pedidos', [operadorController::class, 'list'])->name('operador.list');
 
 Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('pedido.entregado');
+
+Route::get('pedidos-camino', [pedidoController::class, 'pedidos_en_camino'])->name('pedido.camino');
 
 Route::post('login', [loginController::class, 'logout'])->name('logout');
 

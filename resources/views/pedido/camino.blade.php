@@ -1,6 +1,4 @@
 
-
-
 @extends('layout.plantilla')
 
 @section('title','pedidos')
@@ -29,14 +27,16 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
+
         <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
-       
         <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
        
-        <li class="active"><a href="{{route('pedido.camino')}}">pedidos en camino</a></li>
+        <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
+       
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       
+        
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
@@ -45,12 +45,17 @@
 
 
    
-  <div class="flexp ">
-    
-    
-
-   
   
+  <div class="flexp ">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="well well-sm">
+    
+    <form  method="POST" action="{{route('cambiar-estado')}}">
+
+      @csrf
+   
   
   <br>
   <br>
@@ -59,10 +64,7 @@
   @foreach ($new_pedidos as $pedido )
 
 
-  <form  method="POST" action="{{route('pedido.comment')}}">
-
-
-    @csrf
+ 
 
   <p> <strong>N° pedido <br> 
     
@@ -92,21 +94,22 @@
     
     }}</p>
     
-</p>
+  <select name="estado"  >
+
+   
+    <option   value="entregado">entregado</option>
+    <option  value="aplazado">aplazado</option>
+  </select><br><br>
+
+  <button type="submit" class="btn btn-primary btn-lg">enviar</button>
+
+    </form>
+        </div>
+          </div>
+      </div>
+    </div>
   
-<p>estado: {{
-
-$pedido->estado
-
-}}</p>
-
-
-<button type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
-
-  </form>
-
-</div>
-    
+  </div> 
        
     
     

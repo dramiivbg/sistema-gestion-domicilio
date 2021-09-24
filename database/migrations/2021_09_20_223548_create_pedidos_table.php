@@ -24,7 +24,7 @@ class CreatePedidosTable extends Migration
             $table->string('telefono_vendedor');
             $table->string('email_vendedor');
             $table->string('email_comprador');
-            $table->string('estado', 100);
+            $table->string('estado', 100)->nullable();
             $table->string('fecha_llegada');
             $table->string('fecha_entrega');
             $table->text('motivo_incumplimiento')->nullable();

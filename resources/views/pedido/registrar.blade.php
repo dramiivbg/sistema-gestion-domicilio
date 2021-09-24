@@ -203,25 +203,7 @@
                 
 
 
-
-                <div class="center">
-
-                  
-                  <label for=""> estado</label>
-                  <select  name="estado">
-                          
-                    <option value="en camino"> en camino</option>
-                       
-                       <option value="aplazado"> aplazado</option>
-                       <option value="entregado"> entregado</option>
-                       
-                    
-                    
                      
-                     </select><br>
-                     {!! $errors->first('estado','<small>:message</small><br>') !!}
-                </div>
-                     <br><br>
 
 
                     

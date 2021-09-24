@@ -21,7 +21,9 @@ public function list(){
 
 public function edit(){
 
-    return 'edit';
+
+   $operador =  request();
+    return $operador;
 
 }
 

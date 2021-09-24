@@ -32,6 +32,7 @@
         <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
        
         <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
+        <li class="active"><a href="{{route('pedido.camino')}}">pedidos en camino</a></li>
        
       </ul>
       <ul class="nav navbar-nav navbar-right">
