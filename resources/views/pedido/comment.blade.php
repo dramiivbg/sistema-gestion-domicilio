@@ -39,8 +39,7 @@
       <ul class="nav navbar-nav navbar-right">
         
 
-          <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.{{$domiciliario->nombre_completo}}</a></li>
-              
+        
               
           
         
@@ -59,7 +58,7 @@
   
   
     
-    <form  method="POST" class="form-horizontal" action="{{route('nota')}}" >
+    <form  method="POST" class="form-horizontal" action="{{route('pedido.asunto')}}" >
 
      
         @csrf
@@ -85,6 +84,23 @@
         
         </div>
     </div><br>
+
+
+    <div class="form-group">
+
+      <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+      <div class="col-md-8">
+
+      <label for="">nueva fecha</label>
+        <div class='input-group date' id='datetimepicker2'>
+        <input type='text' class="form-control"  name="nueva_fecha" value="{{old('nueva_fecha')}}"/><br>
+        {!! $errors->first('nueva_fecha','<small>:message</small><br>') !!}
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+    </div>
+</div><br>
 
     <div class="center1">
         <div class="form-group">

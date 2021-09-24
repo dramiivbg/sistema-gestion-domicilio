@@ -23,7 +23,7 @@ class homeController extends Controller
 
             if($domiciliario->rol != 'domiciliario'){
 
-            return view('home');
+            return view('home', compact('domiciliario'));
             
         }
 
@@ -39,6 +39,37 @@ class homeController extends Controller
         }
     }
     
+
+    public function home_post(){
+
+
+        $id =  request()->session()->all();
+
+
+       
+        $domiciliario = Operadore::find($id['id']);
+        
+
+        if(!empty($id['id'])){
+
+            if($domiciliario->rol != 'domiciliario'){
+
+            return view('home');
+            
+        }
+
+        if($domiciliario->rol == 'domiciliario'){
+
+            return view('pedido.show');
+        }
+            
+
+        }else{
+
+            return redirect()->route('auth.login');
+        }
+
+    }
     
     
 }

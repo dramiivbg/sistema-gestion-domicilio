@@ -26,8 +26,8 @@
         <a class="navbar-brand" href="#">Home management</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
+        <li class="active"><a href="{{route('home')}}">Home</a></li>
+       
         
       </ul>
       <ul class="nav navbar-nav navbar-right">

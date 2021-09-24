@@ -59,7 +59,7 @@
   @foreach ($new_pedidos as $pedido )
 
 
-  <form  method="POST" action="{{route('pedido.comment', $pedido)}}">
+  <form  method="POST" action="{{route('pedido.comment')}}">
 
 
     @csrf

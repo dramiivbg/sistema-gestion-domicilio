@@ -150,7 +150,7 @@ class pedidoController extends Controller
       $id_pedido = request('id');
 
       
-       $id1 =  request()->session()->all();
+      
 
       
 
@@ -158,10 +158,10 @@ class pedidoController extends Controller
 
 
      
-       $domiciliario = Operadore::find($id1['id']);
+      
 
    
-       return view('pedido.comment', compact('domiciliario'));
+       return view('pedido.comment');
    }
 
 
@@ -171,14 +171,15 @@ class pedidoController extends Controller
 
       request()->validate([
 
-         'motivo' => 'required'
+         'motivo' => 'required',
+         'nueva_fecha' => 'required'
       ]);
 
       $id =  request()->session()->all();
 
       
 
-    $pedido =    Pedido::where('num_pedido', $id['num_pedido'])->update(['motivo_incumplimiento' => request('motivo')]);
+    $pedido =    Pedido::where('num_pedido', $id['num_pedido'])->update(['motivo_incumplimiento' => request('motivo')], ['fecha_entrega' => request('nueva_fecha')]);
 
 
     if($pedido){

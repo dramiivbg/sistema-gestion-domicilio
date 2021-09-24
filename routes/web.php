@@ -25,12 +25,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'home'])->name('home');
 
+
+
+
+
 Route::post('auth1', [formLoginController::class, 'login'])->name('auth1'); 
 
 
-Route::post('comment', [pedidoController::class, 'comment'])->name('pedido.comment');
+Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.comment');
 
-Route::post('nota', [pedidoController::class, 'asunto'])->name('nota');
+Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto');
 
 Route::post('edit', [operadorController::class, 'edit'])->name('edit');
 

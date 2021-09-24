@@ -36,4 +36,10 @@
     });
 </script>    
 
+<script type="text/javascript">
+    $(function() {
+       $('#datetimepicker2').datetimepicker();
+    });
+</script>    
+
 </html>

@@ -39,11 +39,21 @@ class formLoginController extends Controller
 
              
       
-              
+              $id = request()->session()->all();
 
 
+             $operador =  Operadore::find($id['id']);
+
+
+             if($operador->rol == 'domiciliario'){
            
-            return redirect()->route('home');
+            return redirect()->route('pedido.show');
+
+             }else{
+
+
+                return redirect()->route('home');
+             }
 
          }
          else{

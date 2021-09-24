@@ -35,6 +35,9 @@
             <li><a href="#">Page 1-3</a></li>
           </ul>
         </li>
+
+      
+
         <li><a href="{{route('pedido.registrar')}}"><ion-icon name="calendar"></ion-icon>&nbsp;programar Domicilio</a></li>
 
         <li><a href="{{route('operador.list')}}"><ion-icon name="person"></ion-icon>&nbsp;operadores</a></li>
@@ -42,7 +45,10 @@
      
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sr.sanchez</a></li>
+
+       
+        <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.{{$domiciliario->nombre_completo}}</a></li>
+
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
