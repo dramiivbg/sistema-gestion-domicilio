@@ -61,7 +61,7 @@
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.sanchez</a></li>
+     
       <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
     </ul>
   </div>
@@ -87,7 +87,11 @@
                           <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                           <div class="col-md-8">
                               <input id="fname" name="num_pedido" type="text" placeholder="numero del pedido" class="form-control" value="{{old('num_pedido')}}"><br>
+
+  
                               {!! $errors->first('num_pedido', '<small>:message</small><br>') !!}
+
+                    
                           </div>
                       </div>
 
