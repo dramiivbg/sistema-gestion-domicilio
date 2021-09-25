@@ -20,7 +20,7 @@ class loginController extends Controller
     public function logout(){
 
 
-        request()->session()->put(['id' => '']); 
+        request()->session()->put(['id' => null]); 
         
         return redirect()->route('auth.login');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Operadore;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Exists;
 
 class homeController extends Controller
 {
@@ -11,15 +12,19 @@ class homeController extends Controller
 
 
        
+      
 
         $id =  request()->session()->all();
 
 
        
-        $domiciliario = Operadore::find($id['id']);
+     
         
 
         if(!empty($id['id'])){
+
+
+            $domiciliario = Operadore::find($id['id']);
 
             if($domiciliario->rol != 'domiciliario'){
 
@@ -37,7 +42,7 @@ class homeController extends Controller
 
             return redirect()->route('auth.login');
         }
-    }
+     }
     
 
     public function home_post(){
@@ -47,10 +52,12 @@ class homeController extends Controller
 
 
        
-        $domiciliario = Operadore::find($id['id']);
+      
         
 
         if(!empty($id['id'])){
+
+            $domiciliario = Operadore::find($id['id']);
 
             if($domiciliario->rol != 'domiciliario'){
 

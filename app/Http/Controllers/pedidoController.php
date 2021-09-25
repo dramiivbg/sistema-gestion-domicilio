@@ -112,10 +112,10 @@ foreach ($pedido as $domicilio){
      
    $details =[
           'title' => 'pedido entregado',
-          'body' => ' tu pedido: '.$domicilio->num_pedido.'fue entregado que lo disfrutes'
+          'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'fue entregado que lo disfrutes'
       ];
    }
-      Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
+      Mail::to($domicilio->email_comprador)->send(new email($details));
 
       return redirect()->route('pedido.entregado');
 
@@ -136,10 +136,10 @@ foreach ($pedido as $domicilio){
        
      $details =[
             'title' => 'pedido en camino',
-            'body' => ' tu pedido: '.$domicilio->num_pedido.'va en camino'
+            'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'va en camino'
         ];
      }
-        Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
+        Mail::to($domicilio->email_comprador)->send(new email($details));
   
         return redirect()->route('pedido.camino');
         
@@ -166,7 +166,7 @@ if (request('estado') == 'aplazado'){
             'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'fue aplazado'
          ];
      }
-        Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
+        Mail::to($domicilio->email_comprador)->send(new email($details));
   
         return redirect()->route('pedido.aplazado');
         
@@ -185,30 +185,6 @@ if (request('estado') == 'aplazado'){
 
 
 
-
-   public function aplazado(){
-
-      
-      $pedido  = Pedido::where('num_pedido',request('id'))->get();
-      
-       Pedido::where('num_pedido', request('id'))->update(['estado' => request('estado')]);
-      
-            
-      foreach ($pedido as $domicilio){
-           
-         $details =[
-                'title' => 'pedido aplazado',
-                'body' => '<p>'.'numero del pedido: '.$domicilio->num_pedido.'<br>'.'correo del comprador: '.$domicilio->email_comprador.'</p>'
-            ];
-         }
-            Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
-      
-            return redirect()->route('pedido.pedidos');
-            
-          
-            
-         
-         }
 
    public function pedidos_entregados(){
 

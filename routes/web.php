@@ -38,36 +38,34 @@ Route::get('/', [homeController::class, 'home'])->name('home');
 Route::post('auth1', [formLoginController::class, 'login'])->name('auth1'); 
 
 
-Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.comment');
+Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.comment')->middleware('domiciliario');
 
-Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto');
+Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto')->middleware('domiciliario');
 
-Route::get('edit', [operadorController::class, 'edit'])->name('edit');
+Route::get('edit', [operadorController::class, 'edit'])->name('edit')->middleware('admin');
 
-Route::get('delete', [operadorController::class, 'delete'])->name('delete');
+Route::get('delete', [operadorController::class, 'delete'])->name('delete')->middleware('admin');
 
-Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show');
+Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware('domiciliario');
 
-Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('pedido.pedidos');
+Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('pedido.pedidos')->middleware('domiciliario');
 
 
-Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('pedido.aplazado');
+Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('pedido.aplazado')->middleware('domiciliario');
 
-Route::get('list-pedidos', [operadorController::class, 'list'])->name('operador.list');
+Route::get('list-operador', [operadorController::class, 'list'])->name('operador.list')->middleware('admin');
 
-Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('pedido.entregado');
+Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('pedido.entregado')->middleware('domiciliario');
 
-Route::get('pedidos-camino', [pedidoController::class, 'pedidos_en_camino'])->name('pedido.camino');
+Route::get('pedidos-camino', [pedidoController::class, 'pedidos_en_camino'])->name('pedido.camino')->middleware('domiciliario');
 
 Route::post('login', [loginController::class, 'logout'])->name('logout');
 
-Route::post('cambiar-estado', [pedidoController::class, 'cambiar_estado'])->name('cambiar-estado');
+Route::post('cambiar-estado', [pedidoController::class, 'cambiar_estado'])->name('cambiar-estado')->middleware('domiciliario');
 
 Route::post('register1', [formOperadorController::class, 'register'])->name('register1');
 
-Route::get('register1', [formOperadorController::class, 'register'])->name('register1');
-
-Route::post('register', [formPedidoController::class, 'registrar'])->name('domicilio1');
+Route::post('register', [formPedidoController::class, 'registrar'])->name('domicilio1')->middleware('admin');
     
 Route::get('login', [loginController::class, 'login'])->name('auth.login');
 
