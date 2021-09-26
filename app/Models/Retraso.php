@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido extends Model
+class Retraso extends Model
 {
-
-
-    protected $fillable = ['num_pedido', 'articulos'];
+    protected $fillable = ['id_estado','motivo'];
     use HasFactory;
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePedidosTable extends Migration
+class CreateEstadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreatePedidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos', function (Blueprint $table) {
-            $table->string('num_pedido',150)->primary();
-            $table->text('articulos');
+        Schema::create('estados', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('id_domicilio');
+            $table->foreign('id_domicilio')->references('id')->on('domicilios');
+            $table->string('estado');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreatePedidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos');
+        Schema::dropIfExists('estados');
     }
 }

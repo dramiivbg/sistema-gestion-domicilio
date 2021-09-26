@@ -42,9 +42,11 @@ Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.commen
 
 Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto')->middleware('domiciliario');
 
-Route::get('edit', [operadorController::class, 'edit'])->name('edit')->middleware('admin');
+Route::post('edit', [operadorController::class, 'edit'])->name('edit')->middleware('admin');
 
-Route::get('delete', [operadorController::class, 'delete'])->name('delete')->middleware('admin');
+Route::post('edit-operador', [operadorController::class, 'edit_operador'])->name('edit-operador')->middleware('admin');
+
+Route::post('delete', [operadorController::class, 'delete'])->name('delete')->middleware('admin');
 
 Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware('domiciliario');
 
@@ -64,8 +66,9 @@ Route::post('login', [loginController::class, 'logout'])->name('logout');
 Route::post('cambiar-estado', [pedidoController::class, 'cambiar_estado'])->name('cambiar-estado')->middleware('domiciliario');
 
 Route::post('register1', [formOperadorController::class, 'register'])->name('register1');
+Route::get('register1', [formOperadorController::class, 'register'])->name('register1');
 
-Route::post('register', [formPedidoController::class, 'registrar'])->name('domicilio1')->middleware('admin');
+Route::post('register', [formPedidoController::class, 'registrar'])->name('domicilio');
     
 Route::get('login', [loginController::class, 'login'])->name('auth.login');
 
@@ -82,5 +85,5 @@ Route::post('change-password', [formChangeController::class, 'change_password'])
 
 
 
-Route::get('register-address', [pedidoController::class, 'registrar'])->name('pedido.registrar');
+Route::get('register-address', [pedidoController::class, 'registrar'])->name('domicilio.registrar');
 

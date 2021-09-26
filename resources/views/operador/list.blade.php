@@ -64,9 +64,33 @@
         <td>{{$operador->telefono}}</td>
         <td>{{$operador->num_cedula}}</td>
         <td>{{$operador->rol}}</td>
-        <td><a class="btn btn-primary" href="{{route('edit',$operador)}}" role="button"><ion-icon name="create"></ion-icon>edit</a>
+        <td>
+          <form method="post"  action="{{route('edit',$operador)}}">
+
+            @csrf
+
+            <input style="width: 0vh; height: 0vh;"  value="{{$operador->id}}" name="id">
+
+            <button type="submit" style="width: 90px; height: 40px;"  class="btn btn-primary btn-lg"><ion-icon name="create"></ion-icon>edit</button>
+
+ 
         
-            <a  class="btn btn-primary " href="{{route('delete', $operador)}}" style="background-color: red"  role="button"><ion-icon name="close"></ion-icon>delete</a>
+        </form>
+        
+        <form method="post" name="operador" action="{{route('delete', $operador)}}">
+
+          @csrf
+
+          <input style="width: 0vh; height: 0vh;"  value="{{$operador->id}}" name="id">
+
+          <button type="submit"  style="background-color: red; width: 90px; height: 40px;" class="btn btn-primary btn-lg"><ion-icon name="close"></ion-icon>delete</button>
+
+
+      
+      </form>
+
+      
+            
         </td>
         
       </tr>

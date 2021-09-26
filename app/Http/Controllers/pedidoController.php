@@ -17,7 +17,7 @@ class pedidoController extends Controller
       
 
 
-       return view('pedido.registrar');
+       return view('domicilio.registrar');
     
     }
 
