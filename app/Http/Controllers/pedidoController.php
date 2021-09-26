@@ -12,6 +12,50 @@ class pedidoController extends Controller
 {
 
 
+      
+public function edit_pedido(){
+
+
+   request()->validate([
+
+       'articulos' => 'required',
+       
+       
+    ]);
+ 
+ $operador = Pedido::where('num_pedido', request('num_pedido'))->update(['articulos' => request('articulos')]);
+
+
+
+ if($operador){
+
+   return redirect()->route('pedido.list');
+ }
+
+}
+
+
+   public function edit(){
+
+
+      
+   
+      
+   
+      $pedidos = Pedido::where('num_pedido',request('num_pedido'))->get();
+   
+   
+      
+   foreach ($pedidos as $pedido){
+   
+      return view('pedido.edit', compact('pedido'));
+   }
+      
+       
+   
+   }
+   
+
     public function registrar(){
 
       
@@ -36,6 +80,18 @@ class pedidoController extends Controller
 
    }
 
+
+   public function list(){
+
+     
+
+
+         $pedidos = Pedido::paginate();
+     
+         return view('pedido.list', compact('pedidos'));
+     
+     
+   }
 
    public function ver_pedidos(){
 

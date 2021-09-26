@@ -151,7 +151,6 @@
           </ul>
         </li>
 
-        
 
        
 
@@ -160,6 +159,8 @@
         <li><a href="{{route('domicilio.registrar')}}"><ion-icon name="appstore"></ion-icon>&nbsp;crear Domicilio</a></li>
 
         <li><a href="{{route('operador.list')}}"><ion-icon name="person"></ion-icon>&nbsp;operadores</a></li>
+
+        <li><a href="{{route('pedido.list')}}"><ion-icon name="person"></ion-icon>&nbsp;pedidos</a></li>
 
      
       </ul>

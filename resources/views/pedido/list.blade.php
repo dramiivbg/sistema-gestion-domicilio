@@ -1,4 +1,4 @@
-  @extends('layout.plantilla')
+@extends('layout.plantilla')
 
 @section('title','pedidos')
 
@@ -39,7 +39,7 @@
   
 
 
-@foreach ($operadores as $operador)
+@foreach ($pedidos as $pedido)
 
 <div class="card-header">
 
@@ -51,25 +51,22 @@
 <table class="table table-responsive table-bordered" >
     <thead class="thead-dark">
       <tr>
-        <th scope="col">nombre completo</th>
-        <th scope="col">telefono</th>
-        <th scope="col">N° cedula</th>
-        <th scope="col">rol</th>
-        <th scope="col">tag</th>
+        <th scope="col">numero del pedido</th>
+        <th scope="col">articulos</th>
+     
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">{{$operador->nombre_completo}}</th>
-        <td>{{$operador->telefono}}</td>
-        <td>{{$operador->num_cedula}}</td>
-        <td>{{$operador->rol}}</td>
+        <th scope="row">{{$pedido->num_pedido}}</th>
+        <td>{{$pedido->articulos}}</td>
+        
         <td>
-          <form method="post"  action="{{route('edit',$operador)}}">
+          <form method="post"  action="{{route('pedido.edit')}}">
 
             @csrf
 
-            <input style="width: 0vh; height: 0vh;"  value="{{$operador->id}}" name="id">
+            <input style="width: 0vh; height: 0vh;"  value="{{$pedido->num_pedido}}" name="num_pedido">
 
             <button type="submit" style="width: 90px; height: 40px;"  class="btn btn-primary btn-lg"><ion-icon name="create"></ion-icon>edit</button>
 
@@ -91,7 +88,7 @@
 
   <div class="card-footer">
 
-    {{$operadores->links()}}
+    {{$pedidos->links()}}
   </div>
   
   

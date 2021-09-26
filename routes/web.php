@@ -46,7 +46,7 @@ Route::post('edit', [operadorController::class, 'edit'])->name('edit')->middlewa
 
 Route::post('edit-operador', [operadorController::class, 'edit_operador'])->name('edit-operador')->middleware('admin');
 
-Route::post('delete', [operadorController::class, 'delete'])->name('delete')->middleware('admin');
+
 
 Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware('domiciliario');
 
@@ -56,6 +56,16 @@ Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('pedido.pe
 Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('pedido.aplazado')->middleware('domiciliario');
 
 Route::get('list-operador', [operadorController::class, 'list'])->name('operador.list')->middleware('admin');
+
+
+Route::get('list-pedido', [pedidoController::class, 'list'])->name('pedido.list')->middleware('admin');
+
+Route::post('edit', [pedidoController::class, 'edit'])->name('pedido.edit')->middleware('admin');
+
+Route::post('edit-pedido', [pedidoController::class, 'edit_pedido'])->name('edit-pedido')->middleware('admin');
+
+
+
 
 Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('pedido.entregado')->middleware('domiciliario');
 

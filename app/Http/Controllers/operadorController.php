@@ -53,6 +53,8 @@ public function edit(){
 
    $id =  request('id');
 
+   
+
    $operador = Operadore::select('*')->join('logins', 'operadores.id','=', 'logins.id_operador')->where('id',$id)->get();
 
 
@@ -69,6 +71,10 @@ foreach ($operador as $operator){
 public function delete(){
 
     $id =  request('id');
+
+    Login::where('id_operador',$id)->delete();
+
+    return redirect()->route('operador.list');
 
 }
 
