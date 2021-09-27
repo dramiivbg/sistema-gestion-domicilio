@@ -35,22 +35,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
-<script type="text/javascript">
-    $(function() {
-       $('#datetimepicker').datetimepicker();
-    });
-</script>    
-
-<script type="text/javascript">
-    $(function() {
-       $('#datetimepicker1').datetimepicker();
-    });
-</script>    
-
-<script type="text/javascript">
-    $(function() {
-       $('#datetimepicker2').datetimepicker();
-    });
-</script>    
+  
 
 </html>

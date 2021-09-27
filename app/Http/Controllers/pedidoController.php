@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\email;
+use App\Models\Domicilio;
 use App\Models\Operadore;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
@@ -97,29 +98,40 @@ public function edit_pedido(){
 
       $id =  request()->session()->all();
   
-      $pedidos = Pedido::where('id_domiciliario', $id['id'])->get();
-  
-      $new_pedidos = [];
-  
-      foreach($pedidos as $pedido){
-  
-  
-          if(empty($pedido->estado)){
-  
-  
-  
-           for($i = 0; $i< sizeof($pedidos); $i++){
-  
-              $new_pedidos[$i] = $pedido;
+      $domicilios_new = [];
+
+      
+ 
+       $domicilios = Domicilio::select('*')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->where('id_domiciliario', $id)->get();
+
+    
+
+           
+
+          
+
+           for($i=0 ; $i < sizeof($domicilios); $i++){
+
+             for($j=0 ; $j < sizeof($domicilios); $j++){
+
+                if($domicilios[$i]->id == $domicilios[$j]->id && $domicilios[$j]->estado != 'en proceso'){
+
+
+
+                 unset($domicilios[$j]);
+
+
+                }
+
+
+             }
            }
-  
-          }
-      }
-  
-      return view('pedido.pedidos', compact('new_pedidos'));
-  
-  
-  
+
+          
+
+           return view('domicilio.pedidos', compact('domicilios'));
+
+           
      }
   
   

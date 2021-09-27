@@ -21,8 +21,6 @@ class formOperadorController extends Controller
         
      ]);
 
-   
-    
 
         $operador = Operadore::create([
 

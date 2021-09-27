@@ -65,7 +65,7 @@
         <td>{{$operador->num_cedula}}</td>
         <td>{{$operador->rol}}</td>
         <td>
-          <form method="post"  action="{{route('edit',$operador)}}">
+          <form method="post"  action="{{route('operador.edit',$operador)}}">
 
             @csrf
 

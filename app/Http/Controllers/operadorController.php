@@ -33,7 +33,7 @@ public function edit_operador(){
 
   if($login){
 
-    return redirect()->route('home');
+    return redirect()->route('operador.list');
   }
 
 }

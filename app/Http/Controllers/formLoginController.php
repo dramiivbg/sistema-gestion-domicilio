@@ -21,12 +21,6 @@ class formLoginController extends Controller
 
         $operador = Login::where('email', request('username'))->get();
 
-
-
-      
-
-
-
         foreach($operador as $operator){
 
 

@@ -10,16 +10,7 @@ class homeController extends Controller
 {
     public function home(){
 
-
-       
-      
-
         $id =  request()->session()->all();
-
-
-       
-     
-        
 
         if(!empty($id['id'])){
 

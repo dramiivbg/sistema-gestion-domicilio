@@ -31,11 +31,6 @@ class formPedidoController extends Controller
             'articulos' => request('articulos')
           ]);
 
-
-
-
-
-
             $comprador = Compradore::find(request('comprador_id'));
 
       

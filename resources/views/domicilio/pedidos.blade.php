@@ -62,14 +62,15 @@
   <br>
   
   
-  @foreach ($new_pedidos as $pedido )
+  @foreach ($domicilios as $domicilio )
 
 
+  {{$domicilio}}<br>
  
-
+{{-- 
   <p> <strong>N° pedido <br> 
     
-    <input type="text" name="id" value="{{$pedido->num_pedido}}" readonly>
+    <input type="text" name="id" value="{{$domicilio->num_pedido}}" readonly>
     
     </strong>
     </p>
@@ -118,7 +119,7 @@
     
   
   
-      
+       --}}
   @endforeach
 
     

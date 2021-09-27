@@ -42,7 +42,7 @@ Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.commen
 
 Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto')->middleware('domiciliario');
 
-Route::post('edit', [operadorController::class, 'edit'])->name('edit')->middleware('admin');
+Route::post('editar', [operadorController::class, 'edit'])->name('operador.edit')->middleware('admin');
 
 Route::post('edit-operador', [operadorController::class, 'edit_operador'])->name('edit-operador')->middleware('admin');
 
@@ -50,7 +50,7 @@ Route::post('edit-operador', [operadorController::class, 'edit_operador'])->name
 
 Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware('domiciliario');
 
-Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('pedido.pedidos')->middleware('domiciliario');
+Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('domicilio.pedidos')->middleware('domiciliario');
 
 
 Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('pedido.aplazado')->middleware('domiciliario');
