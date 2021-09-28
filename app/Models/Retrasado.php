@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Retraso extends Model
+class Retrasado extends Model
 {
-    protected $fillable = ['id_estado','motivo'];
+
+
+    protected $fillable = ['id_estado', 'motivo'];
     use HasFactory;
 }

@@ -1,6 +1,5 @@
 
 
-
 @extends('layout.plantilla')
 
 @section('title','pedidos')
@@ -29,14 +28,15 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
+        <li class="active"><a href="{{route('domicilio.entregado')}}">pedidos entregados</a></li>
        
-        <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
+        <li class="active"><a href="{{route('domicilio.pedidos')}}">pedidos</a></li>
        
-        <li class="active"><a href="{{route('pedido.camino')}}">pedidos en camino</a></li>
+        <li class="active"><a href="{{route('domicilio.camino')}}">pedidos en camino</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       
+        
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
@@ -45,29 +45,47 @@
 
 
    
+  
   <div class="flexp ">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="well well-sm">
     
-    
+    <form  method="POST" action="{{route('pedido.comment')}}">
 
+      @csrf
    
   
-  
   <br>
   <br>
   
+
+ 
   
-  @foreach ($new_pedidos as $pedido )
+  @foreach ($domicilios_new as $domicilio )
 
 
-  <form  method="POST" action="{{route('pedido.comment')}}">
+  <p> <strong> <br> 
+    
+    <input type="text" name="id_estado" value="{{$domicilio->id}}" readonly>
+    
+    </strong>
+    </p>
 
 
-    @csrf
+  <p> <strong>numero del domicilio <br> 
+    
+    <input type="text" name="id" value="{{$domicilio->id_domicilio}}" readonly>
+    
+    </strong>
+    </p>
+  
 
   <p> <strong>N° pedido <br> 
     
-    <input type="text" name="id" value="{{$pedido->num_pedido}}" readonly>
-    
+    {{$domicilio->num_pedido}}
+
     </strong>
     </p>
     
@@ -75,38 +93,28 @@
     
     <p> direccion: {{
     
-    $pedido->direccion
+    $domicilio->direccion
     
     }}</p>
     
     
-    <p>telefono: {{
+    <p>telefono del comprador: {{
     
-    $pedido->telefono_comprador
+    $domicilio->telefono
     
     }}</p>
   
-    <p>fecha de entrega: {{
-    
-    $pedido->fecha_entrega
-    
-    }}</p>
-    
-</p>
   
-<p>estado: {{
 
-$pedido->estado
+  <button type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
 
-}}</p>
-
-
-<button type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
-
-  </form>
-
-</div>
-    
+    </form>
+        </div>
+          </div>
+      </div>
+    </div>
+  
+  </div> 
        
     
     
@@ -114,7 +122,7 @@ $pedido->estado
     
   
   
-      
+       
   @endforeach
 
     
@@ -124,3 +132,21 @@ $pedido->estado
 
 
 @endsection()
+
+    
+       
+    
+    
+      
+    
+  
+  
+
+    
+
+
+
+
+
+
+

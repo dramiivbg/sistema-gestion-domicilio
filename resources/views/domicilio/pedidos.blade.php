@@ -29,11 +29,11 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
+        <li class="active"><a href="{{route('domicilio.entregado')}}">pedidos entregados</a></li>
        
-        <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
+        <li class="active"><a href="{{route('domicilio.aplazado')}}">pedidos aplazados</a></li>
        
-        <li class="active"><a href="{{route('pedido.camino')}}">pedidos en camino</a></li>
+        <li class="active"><a href="{{route('domicilio.camino')}}">pedidos en camino</a></li>
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -60,18 +60,27 @@
   
   <br>
   <br>
+
+  @if (!empty($domicilios))
+
   
-  
+      
   @foreach ($domicilios as $domicilio )
 
 
-  {{$domicilio}}<br>
- 
-{{-- 
+
+  <p> <strong>numero del domicilio <br> 
+    
+    <input type="text" name="id" value="{{$domicilio->id_domicilio}}" readonly>
+    
+    </strong>
+    </p>
+  
+
   <p> <strong>N° pedido <br> 
     
-    <input type="text" name="id" value="{{$domicilio->num_pedido}}" readonly>
-    
+    {{$domicilio->num_pedido}}
+
     </strong>
     </p>
     
@@ -79,28 +88,22 @@
     
     <p> direccion: {{
     
-    $pedido->direccion
+    $domicilio->direccion
     
     }}</p>
     
     
-    <p>telefono: {{
+    <p>telefono del comprador: {{
     
-    $pedido->telefono_comprador
+    $domicilio->telefono
     
     }}</p>
   
-    <p>fecha de entrega: {{
-    
-    $pedido->fecha_entrega
-    
-    }}</p>
-    
+  
   <select name="estado"  >
 
     <option   value="en camino">camino</option>
-    <option   value="entregado">entregado</option>
-    <option  value="aplazado">aplazado</option>
+  
   </select><br><br>
 
   <button type="submit" class="btn btn-primary btn-lg">enviar</button>
@@ -119,13 +122,14 @@
     
   
   
-       --}}
-  @endforeach
+       
+  @endforeach 
 
+  @endif   
     
 
 
-
+ 
 
 
 @endsection()

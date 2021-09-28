@@ -38,7 +38,7 @@ Route::get('/', [homeController::class, 'home'])->name('home');
 Route::post('auth1', [formLoginController::class, 'login'])->name('auth1'); 
 
 
-Route::get('comment', [pedidoController::class, 'comment'])->name('pedido.comment')->middleware('domiciliario');
+Route::post('comment', [pedidoController::class, 'comment'])->name('pedido.comment')->middleware('domiciliario');
 
 Route::post('nota', [pedidoController::class, 'asunto'])->name('pedido.asunto')->middleware('domiciliario');
 
@@ -53,7 +53,7 @@ Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])-
 Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('domicilio.pedidos')->middleware('domiciliario');
 
 
-Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('pedido.aplazado')->middleware('domiciliario');
+Route::get('pedidos-aplazados', [pedidoController::class, 'pedidos_aplazados'])->name('domicilio.aplazado')->middleware('domiciliario');
 
 Route::get('list-operador', [operadorController::class, 'list'])->name('operador.list')->middleware('admin');
 
@@ -67,9 +67,9 @@ Route::post('edit-pedido', [pedidoController::class, 'edit_pedido'])->name('edit
 
 
 
-Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('pedido.entregado')->middleware('domiciliario');
+Route::get('pedidos-entregados', [pedidoController::class, 'pedidos_entregados'])->name('domicilio.entregado')->middleware('domiciliario');
 
-Route::get('pedidos-camino', [pedidoController::class, 'pedidos_en_camino'])->name('pedido.camino')->middleware('domiciliario');
+Route::get('pedidos-camino', [pedidoController::class, 'pedidos_en_camino'])->name('domicilio.camino')->middleware('domiciliario');
 
 Route::post('login', [loginController::class, 'logout'])->name('logout');
 

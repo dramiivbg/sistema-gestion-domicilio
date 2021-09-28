@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Mail\email;
 use App\Models\Domicilio;
+use App\Models\Estado;
 use App\Models\Operadore;
 use App\Models\Pedido;
+use App\Models\Retrasado;
+use App\Models\Retraso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -102,31 +105,20 @@ public function edit_pedido(){
 
       
  
-       $domicilios = Domicilio::select('*')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->where('id_domiciliario', $id)->get();
+       $domicilios = Domicilio::select('estados.id_domicilio','domicilios.num_pedido', 'compradores.direccion', 'compradores.telefono', 'estados.estado')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->groupBy('id_domicilio','estado')->where('id_domiciliario', $id['id'])->get();
 
     
 
-           
+       foreach($domicilios as $domicilio){
 
-          
+             if($domicilio->estado != 'en proceso'){
 
-           for($i=0 ; $i < sizeof($domicilios); $i++){
+              unset($domicilios);
 
-             for($j=0 ; $j < sizeof($domicilios); $j++){
-
-                if($domicilios[$i]->id == $domicilios[$j]->id && $domicilios[$j]->estado != 'en proceso'){
-
-
-
-                 unset($domicilios[$j]);
-
-
-                }
-
-
-             }
-           }
-
+              $domicilios = null;
+            
+            }
+       }
           
 
            return view('domicilio.pedidos', compact('domicilios'));
@@ -139,31 +131,45 @@ public function edit_pedido(){
 
    public function pedidos_en_camino(){
 
-    $id =  request()->session()->all();
+      $id =  request()->session()->all();
+  
+      $domicilios_new = [];
 
-    $pedidos = Pedido::where('id_domiciliario', $id['id'])->get();
+      
+ 
+       $domicilios = Domicilio::select('estados.id_domicilio','domicilios.num_pedido', 'compradores.direccion', 'compradores.telefono', 'estados.estado')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->groupBy('id_domicilio','estado')->where('id_domiciliario', $id['id'])->get();
 
-    $new_pedidos = [];
+    
 
-    foreach($pedidos as $pedido){
+       foreach($domicilios as $domicilio){
+
+             if($domicilio->estado == 'entregado' || $domicilio->estado == 'aplazado'){
+
+              unset($domicilios);
+
+              $domicilios = null;
+            
+            }
 
 
-        if($pedido->estado == 'en camino'){
+       }
 
+       if(!empty($domicilios)){
 
+       for($i = 0 ; $i < sizeof($domicilios); $i++){
 
-         for($i = 0; $i< sizeof($pedidos); $i++){
+         if($domicilios[$i]->estado == 'en proceso'){
 
-            $new_pedidos[$i] = $pedido;
+            unset($domicilios[$i]);
          }
+       }
+      }
+          
 
-        }
-    }
+           return view('domicilio.camino', compact('domicilios'));
 
-    return view('pedido.camino', compact('new_pedidos'));
-
-
-
+           
+    
    }
 
 
@@ -171,46 +177,75 @@ public function edit_pedido(){
 
   if(request('estado') == 'entregado'){    
 
-$pedido  = Pedido::where('num_pedido',request('id'))->get();
 
- Pedido::where('num_pedido', request('id'))->update(['estado' => request('estado')]);
+
+   $domicilios = Domicilio::select('*')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->join('pedidos', 'domicilios.num_pedido','=','pedidos.num_pedido')->where('id_domicilio', request('id'))->get();
+
+    
+
+$fecha = date("Y-m-d"); 
+ $estado = Estado::create([
+    'id_domicilio' => request('id'),
+    'estado' => 'entregado',
+    'fecha' => $fecha
+ ]);
+
+
+ if($estado){
 
       
-foreach ($pedido as $domicilio){
+foreach ($domicilios as $domicilio){
      
    $details =[
           'title' => 'pedido entregado',
           'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'fue entregado que lo disfrutes'
       ];
+
+      Mail::to($domicilio->email)->send(new email($details));
+     
    }
-      Mail::to($domicilio->email_comprador)->send(new email($details));
-
-      return redirect()->route('pedido.entregado');
-
-
     
+
+      return redirect()->route('domicilio.entregado');
+
+
+} 
       
   }
 
 
   if (request('estado') == 'en camino'){
 
-   $pedido  = Pedido::where('num_pedido',request('id'))->get();
+
+
+   $domicilios = Domicilio::select('*')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->join('pedidos', 'domicilios.num_pedido','=','pedidos.num_pedido')->where('id_domicilio', request('id'))->get();
+
+    
+
+$fecha = date("Y-m-d"); 
+ $estado = Estado::create([
+    'id_domicilio' => request('id'),
+    'estado' => 'en camino',
+    'fecha' => $fecha
+ ]);
+
       
-   Pedido::where('num_pedido', request('id'))->update(['estado' => request('estado')]);
-  
-        
-  foreach ($pedido as $domicilio){
+ if($estado){
+
+foreach ($domicilios as $domicilio){
+     
+   $details =[
+          'title' => 'pedido en camino',
+          'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'va en camino'
+      ];
+
+      Mail::to($domicilio->email)->send(new email($details));
+   }
        
-     $details =[
-            'title' => 'pedido en camino',
-            'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'va en camino'
-        ];
-     }
-        Mail::to($domicilio->email_comprador)->send(new email($details));
   
-        return redirect()->route('pedido.camino');
-        
+        return redirect()->route('domicilio.camino');
+}
+
       
  
 
@@ -222,24 +257,34 @@ foreach ($pedido as $domicilio){
 if (request('estado') == 'aplazado'){
 
 
+   
+
+
+   $domicilios = Domicilio::select('*')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->join('pedidos', 'domicilios.num_pedido','=','pedidos.num_pedido')->where('id_domicilio', request('id'))->get();
+
+    
+
+$fecha = date("Y-m-d"); 
+ $estado = Estado::create([
+    'id_domicilio' => request('id'),
+    'estado' => 'aplazado',
+    'fecha' => $fecha
+ ]);
+
+ if($estado){
       
-   Pedido::where('num_pedido', request('id'))->update(['estado' => request('estado')]);
-  
-   $pedido  = Pedido::where('num_pedido',request('id'))->get();
-        
-  foreach ($pedido as $domicilio){
-       
-     $details =[
-            'title' => 'pedido aplazado',
-            'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'fue aplazado'
-         ];
-     }
-        Mail::to($domicilio->email_comprador)->send(new email($details));
-  
-        return redirect()->route('pedido.aplazado');
+foreach ($domicilios as $domicilio){
+     
+   $details =[
+          'title' => 'pedido aplazado',
+          'body' => ' tu pedido: '.$domicilio->num_pedido.' '.'fue aplazado'
+      ];
+
+      Mail::to($domicilio->email)->send(new email($details));
+   }     return redirect()->route('domicilio.aplazado');
         
       
- 
+}
 
    
 }
@@ -255,32 +300,29 @@ if (request('estado') == 'aplazado'){
 
 
    public function pedidos_entregados(){
-
       $id =  request()->session()->all();
+  
+      $domicilios_new = [];
 
-    $pedidos = Pedido::where('id_domiciliario', $id['id'])->get();
+      
+ 
+       $domicilios = Domicilio::select('estados.id_domicilio','domicilios.num_pedido', 'compradores.direccion', 'compradores.telefono', 'estados.estado')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->groupBy('id_domicilio','estado')->where('id_domiciliario', $id['id'])->get();
 
-    $new_pedidos = [];
+    
 
-    foreach($pedidos as $pedido){
+       for( $i = 0; $i < sizeof($domicilios); $i++){
 
+             if($domicilios[$i]->estado == 'entregado'){
 
-        if($pedido->estado == 'entregado'){
+               $domicilios_new[$i]= $domicilios[$i];
+            
+            }
+       }
+          
 
+           return view('domicilio.entregado', compact('domicilios_new'));
 
-
-         for($i = 0; $i< sizeof($pedidos); $i++){
-
-            $new_pedidos[$i] = $pedido;
-         }
-
-        }
-    }
-
-    return view('pedido.entregado', compact('new_pedidos'));
-
-
-   }
+              }
    
 
 
@@ -288,28 +330,26 @@ if (request('estado') == 'aplazado'){
    public function pedidos_aplazados(){
 
       $id =  request()->session()->all();
+  
+      $domicilios_new = [];
 
-    $pedidos = Pedido::where('id_domiciliario', $id['id'])->get();
+      
+ 
+       $domicilios = Domicilio::select('estados.id_domicilio','domicilios.num_pedido', 'compradores.direccion', 'compradores.telefono', 'estados.estado', 'estados.id')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->groupBy('id_domicilio','estado','estados.id')->where('id_domiciliario', $id['id'])->get();
 
-    $new_pedidos = [];
+    
 
-    foreach($pedidos as $pedido){
+       for( $i = 0; $i < sizeof($domicilios); $i++){
 
+             if($domicilios[$i]->estado == 'aplazado'){
 
-        if($pedido->estado == 'aplazado' && empty($pedido->motivo_incumplimiento)){
+               $domicilios_new[$i]= $domicilios[$i];
+            
+            }
+       }
+          
 
-
-
-         for($i = 0; $i< sizeof($pedidos); $i++){
-
-            $new_pedidos[$i] = $pedido;
-         }
-
-        }
-    }
-
-    return view('pedido.aplazado', compact('new_pedidos'));
-
+           return view('domicilio.aplazado', compact('domicilios_new'));
 
    }
 
@@ -318,21 +358,21 @@ if (request('estado') == 'aplazado'){
 
 
 
-      $id_pedido = request('id');
+      $id_pedido = request('id_estado');
 
       
       
 
       
 
-       request()->session()->put(['num_pedido' => $id_pedido]);
+       request()->session()->put(['id_estado' => $id_pedido]);
 
 
      
       
 
    
-       return view('pedido.comment');
+       return view('domicilio.comment');
    }
 
    
@@ -345,17 +385,8 @@ if (request('estado') == 'aplazado'){
 
 
 
-   public function sendEmail(Pedido $pedido){
 
-      $details =[
-          'title' => 'pedido aplazado',
-          'body' => $pedido->motivo_incumplimiento
-      ];
-
-      Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
-
-      return redirect()->route('pedido.aplazado');
-  }
+    
 
 
 
@@ -363,25 +394,45 @@ if (request('estado') == 'aplazado'){
    public function asunto(){
 
 
-
+ $session = request()->session()->all();
+ 
       request()->validate([
 
          'motivo' => 'required',
-         'nueva_fecha' => 'required'
+         
       ]);
 
-      $id =  request()->session()->all();
+     
 
       
 
-    $pedido =    Pedido::where('num_pedido', $id['num_pedido'])->update(['motivo_incumplimiento' => request('motivo')], ['fecha_entrega' => request('nueva_fecha')]);
+    $retraso =    Retrasado::create([
+
+                 'id_estado' => $session['id_estado'],
+                 'motivo' => request('motivo')
+
+    ]);
+
+    
+    if($retraso){
 
 
-    if($pedido){
+      $pedidos = Domicilio::select('domicilios.num_pedido','clientes.email')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente', '=', 'clientes.nombre')->where('estados.id', request('id_estado'))->get();
 
 
-      $clase = new pedidoController;
-      $clase->sendEmail($pedido);
+      foreach($pedidos as $pedido){
+
+     $details =[
+          'title' => 'pedido aplazado',
+          'body' => 'el pedido:'.$pedido->num_pedido.'  '.'fue aplazado por'.' '.$retraso->motivo
+      ];
+
+      Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
+
+      
+   }
+
+   return redirect()->route('domicilio.aplazado');
       
     }
 

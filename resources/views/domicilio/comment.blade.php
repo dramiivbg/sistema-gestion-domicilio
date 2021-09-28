@@ -30,9 +30,9 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
+        <li class="active"><a href="{{route('domicilio.entregado')}}">pedidos entregados</a></li>
        
-        <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
+        <li class="active"><a href="{{route('domicilio.aplazado')}}">pedidos aplazados</a></li>
        
         
       </ul>
@@ -86,21 +86,7 @@
     </div><br>
 
 
-    <div class="form-group">
-
-      <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-      <div class="col-md-8">
-
-      <label for="">nueva fecha</label>
-        <div class='input-group date' id='datetimepicker2'>
-        <input type='text' class="form-control"  name="nueva_fecha" value="{{old('nueva_fecha')}}"/><br>
-        {!! $errors->first('nueva_fecha','<small>:message</small><br>') !!}
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-        </div>
-    </div>
-</div><br>
+  
 
     <div class="center1">
         <div class="form-group">

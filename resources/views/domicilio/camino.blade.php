@@ -1,4 +1,6 @@
 
+
+
 @extends('layout.plantilla')
 
 @section('title','pedidos')
@@ -27,12 +29,11 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-
-        <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
-        <li class="active"><a href="{{route('pedido.entregado')}}">pedidos entregados</a></li>
+        <li class="active"><a href="{{route('domicilio.entregado')}}">pedidos entregados</a></li>
        
-        <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
+        <li class="active"><a href="{{route('domicilio.aplazado')}}">pedidos aplazados</a></li>
        
+        <li class="active"><a href="{{route('domicilio.pedidos')}}">pedidos</a></li>
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -60,16 +61,25 @@
   <br>
   <br>
   
+
+  @if (!empty($domicilios))
   
-  @foreach ($new_pedidos as $pedido )
+  @foreach ($domicilios as $domicilio )
 
 
- 
+
+  <p> <strong>numero del domicilio <br> 
+    
+    <input type="text" name="id" value="{{$domicilio->id_domicilio}}" readonly>
+    
+    </strong>
+    </p>
+  
 
   <p> <strong>N° pedido <br> 
     
-    <input type="text" name="id" value="{{$pedido->num_pedido}}" readonly>
-    
+    {{$domicilio->num_pedido}}
+
     </strong>
     </p>
     
@@ -77,28 +87,24 @@
     
     <p> direccion: {{
     
-    $pedido->direccion
+    $domicilio->direccion
     
     }}</p>
     
     
-    <p>telefono: {{
+    <p>telefono del comprador: {{
     
-    $pedido->telefono_comprador
+    $domicilio->telefono
     
     }}</p>
   
-    <p>fecha de entrega: {{
-    
-    $pedido->fecha_entrega
-    
-    }}</p>
-    
+  
   <select name="estado"  >
 
-   
     <option   value="entregado">entregado</option>
-    <option  value="aplazado">aplazado</option>
+    <option   value="aplazado">aplazado</option>
+    
+  
   </select><br><br>
 
   <button type="submit" class="btn btn-primary btn-lg">enviar</button>
@@ -117,10 +123,10 @@
     
   
   
-      
+       
   @endforeach
 
-    
+    @endif
 
 
 

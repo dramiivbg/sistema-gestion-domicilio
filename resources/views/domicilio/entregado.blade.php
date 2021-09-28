@@ -29,14 +29,15 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('pedido.pedidos')}}">ver pedidos</a></li>
+        <li class="active"><a href="{{route('domicilio.pedidos')}}">pedidos</a></li>
        
-        <li class="active"><a href="{{route('pedido.aplazado')}}">pedidos aplazados</a></li>
-        <li class="active"><a href="{{route('pedido.camino')}}">pedidos en camino</a></li>
+        <li class="active"><a href="{{route('domicilio.aplazado')}}">pedidos aplazados</a></li>
        
+        <li class="active"><a href="{{route('domicilio.camino')}}">pedidos en camino</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-     
+        
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>
@@ -45,27 +46,42 @@
 
 
    
+  
   <div class="flexp ">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="well well-sm">
     
-    
+    <form  method="POST" action="{{route('cambiar-estado')}}">
 
       @csrf
    
- 
   
   <br>
   <br>
   
+
+
+
   
-  @foreach ($new_pedidos as $pedido )
+      
+  @foreach ($domicilios_new as $domicilio )
 
 
- 
+
+  <p> <strong>numero del domicilio <br> 
+    
+    <input type="text" name="id" value="{{$domicilio->id_domicilio}}" readonly>
+    
+    </strong>
+    </p>
+  
 
   <p> <strong>N° pedido <br> 
     
-    <input type="text" name="id" value="{{$pedido->num_pedido}}" readonly>
-    
+    {{$domicilio->num_pedido}}
+
     </strong>
     </p>
     
@@ -73,34 +89,25 @@
     
     <p> direccion: {{
     
-    $pedido->direccion
+    $domicilio->direccion
     
     }}</p>
     
     
-    <p>telefono: {{
+    <p>telefono del comprador: {{
     
-    $pedido->telefono_comprador
+    $domicilio->telefono
     
     }}</p>
   
-    <p>fecha de entrega: {{
-    
-    $pedido->fecha_entrega
-    
-    }}</p>
-    
-</p>
+
+    </form>
+        </div>
+          </div>
+      </div>
+    </div>
   
-<p>estado: {{
-
-$pedido->estado
-
-}}</p>
-
-
-</div>
-    
+  </div> 
        
     
     
@@ -108,8 +115,10 @@ $pedido->estado
     
   
   
-      
+       
   @endforeach
+
+  
 
     
 
