@@ -74,12 +74,18 @@ public function edit_pedido(){
 
 
       $id1 =  request()->session()->all();
+
+      if(!empty($id1)){
    
 
       $domiciliario = Operadore::find($id1['id']);
 
      return  view('pedido.show', compact('domiciliario'));
-
+      }
+      else{
+          
+         return redirect()->route('auth.login');
+      }
 
 
    }
@@ -392,6 +398,7 @@ foreach ($domicilios as $domicilio){
 
 
    public function asunto(){
+
  $session = request()->session()->all();
  
       request()->validate([
@@ -406,7 +413,9 @@ foreach ($domicilios as $domicilio){
                  'motivo' => request('motivo')]);
 
  if($retraso){
+
 $pedidos = Domicilio::select('domicilios.num_pedido','clientes.email')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente', '=', 'clientes.nombre')->where('estados.id', request('id_estado'))->get();
+
 foreach($pedidos as $pedido){
 
      $details =[
@@ -414,15 +423,15 @@ foreach($pedidos as $pedido){
           'body' => 'el pedido:'.$pedido->num_pedido.'  '.'fue aplazado por'.' '.$retraso->motivo
       ];
 
-      Mail::to('sanchez.ivan@correounivalle.edu.co')->send(new email($details));
+      Mail::to($pedido->email)->send(new email($details));
 
       
    }
 
    return redirect()->route('domicilio.aplazado');
       
-    }
-
+    
+ }
    }
    
 

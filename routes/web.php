@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\domiciliosController;
 use App\Http\Controllers\emailController;
 use App\Http\Controllers\formChangeController;
 use App\Http\Controllers\formLoginController;
 use App\Http\Controllers\formOperadorController;
 use App\Http\Controllers\formPedidoController;
+use App\Http\Controllers\grafiController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\operadorController;
@@ -35,7 +37,7 @@ Route::get('/', [homeController::class, 'home'])->name('home');
 
 
 
-Route::post('auth1', [formLoginController::class, 'login'])->name('auth1'); 
+Route::post('auth', [formLoginController::class, 'login'])->name('auth1'); 
 
 
 Route::post('comment', [pedidoController::class, 'comment'])->name('pedido.comment')->middleware('domiciliario');
@@ -75,10 +77,10 @@ Route::post('login', [loginController::class, 'logout'])->name('logout');
 
 Route::post('cambiar-estado', [pedidoController::class, 'cambiar_estado'])->name('cambiar-estado')->middleware('domiciliario');
 
-Route::post('register1', [formOperadorController::class, 'register'])->name('register1');
-Route::get('register1', [formOperadorController::class, 'register'])->name('register1');
+Route::post('register1', [formOperadorController::class, 'register'])->name('register1')->middleware('admin');
+Route::get('register1', [formOperadorController::class, 'register'])->name('register1')->middleware('admin');
 
-Route::post('register', [formPedidoController::class, 'registrar'])->name('domicilio');
+Route::post('register-pedido', [formPedidoController::class, 'registrar'])->name('domicilio')->middleware('admin');
     
 Route::get('login', [loginController::class, 'login'])->name('auth.login');
 
@@ -89,11 +91,36 @@ Route::get('change-password', [loginController::class, 'change'])->name('auth.ch
 Route::post('change-password', [formChangeController::class, 'change_password'])->name('change');
 
 
+Route::get('register-address', [pedidoController::class, 'registrar'])->name('domicilio.registrar')->middleware('admin');
+
+
+Route::get('grafic-entregados', [grafiController::class, 'viewEntregado'])->name('estadisticas.entregados')->middleware('admin');
+
+Route::post('grafic-entregados', [grafiController::class, 'total_entregados'])->name('entregados')->middleware('admin');
+
+
+Route::get('grafic-en-camino', [grafiController::class, 'viewCamino'])->name('estadisticas.camino')->middleware('admin');
+
+Route::post('grafic-en-camino', [grafiController::class, 'total_camino'])->name('camino')->middleware('admin');
+
+
+Route::get('grafic-aplazados', [grafiController::class, 'viewAplazados'])->name('estadisticas.aplazados')->middleware('admin');
+
+
+Route::post('grafic-aplazados', [grafiController::class, 'total_aplazados'])->name('aplazados')->middleware('admin');
+
+Route::get('grafic-en-procesos', [grafiController::class, 'viewProceso'])->name('estadisticas.proceso')->middleware('admin');
+
+Route::post('grafic-en-proceso', [grafiController::class, 'total_proceso'])->name('proceso')->middleware('admin');
 
 
 
+Route::post('domicilios-entregados', [domiciliosController::class, 'domicilios_entregados'])->name('domiciliario.entregados')->middleware('admin');
+
+Route::post('domicilios-en-proceso', [domiciliosController::class, 'domicilios_en_proceso'])->name('domiciliario.proceso')->middleware('admin');
+
+Route::post('domicilios-en-camino', [domiciliosController::class, 'domicilios_en_camino'])->name('domiciliario.caminos')->middleware('admin');
 
 
-
-Route::get('register-address', [pedidoController::class, 'registrar'])->name('domicilio.registrar');
+Route::post('domicilios-aplazados', [domiciliosController::class, 'domicilios_aplazados'])->name('domiciliario.aplazados')->middleware('admin');
 

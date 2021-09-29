@@ -18,8 +18,11 @@ class formLoginController extends Controller
 
        ]);
 
+    
 
         $operador = Login::where('email', request('username'))->get();
+
+        
 
         foreach($operador as $operator){
 
@@ -38,6 +41,8 @@ class formLoginController extends Controller
 
              $operador =  Operadore::find($id['id']);
 
+             
+
 
              if($operador->rol == 'domiciliario'){
            
@@ -54,8 +59,13 @@ class formLoginController extends Controller
 
             return redirect()->route('auth.login');
         }
-       
     }
 
+       
+       
+        
+
+           }
+
     }
-}
+

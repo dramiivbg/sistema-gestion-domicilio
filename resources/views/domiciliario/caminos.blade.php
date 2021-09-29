@@ -16,6 +16,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/pedido.scss">
+
     
 @endsection
 
@@ -28,12 +29,18 @@
         <a class="navbar-brand" href="#">Home management</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>
-        <li class="active"><a href="{{route('domicilio.pedidos')}}">pedidos</a></li>
+        <li class="active"><a href="{{route('pedido.show')}}">Home</a></li>&nbsp;
+
+        <div class="dropdown">
+          <button style="background-color: black; " class="dropbtn"> <ion-icon name="stats"></ion-icon> estadisticas</button>
+          <div class="dropdown-content">
+            <a href="{{route('estadisticas.entregados')}}">domicilios entregados</a>
+            <a href="{{route('estadisticas.camino')}}">domicilios en camino</a>
+            <a href="{{route('estadisticas.aplazados')}}">domicilios aplazados</a>
+            <a href="{{route('estadisticas.proceso')}}">domicilios proceso</a>
+          </div>
+        </div>
        
-        <li class="active"><a href="{{route('domicilio.aplazado')}}">pedidos aplazados</a></li>
-       
-        <li class="active"><a href="{{route('domicilio.camino')}}">pedidos en camino</a></li>
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -53,9 +60,9 @@
           <div class="col-md-12">
               <div class="well well-sm">
     
-    <form  method="POST" action="{{route('cambiar-estado')}}">
+   
 
-      @csrf
+      
    
   
   <br>
@@ -66,7 +73,8 @@
 
   
       
-  @foreach ($domicilios_new as $domicilio )
+  @foreach ($domicilios as $domicilio )
+
 
 
 
@@ -98,15 +106,18 @@
     
     $domicilio->telefono
     
-    }}</p>
+    }}</p><br><br><br>
   
+
   @endforeach
 
-    </form>
+  
         </div>
           </div>
       </div>
     </div>
+
+ 
   
   </div> 
        

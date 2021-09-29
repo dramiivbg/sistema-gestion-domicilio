@@ -108,6 +108,9 @@
 
   <button type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
 
+       
+  @endforeach
+
     </form>
         </div>
           </div>
@@ -122,8 +125,7 @@
     
   
   
-       
-  @endforeach
+  
 
     
 

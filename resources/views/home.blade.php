@@ -121,6 +121,50 @@
   @media only screen and (max-width: 300px) {
     .prev, .next,.text {font-size: 11px}
   }
+
+
+  .dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+  
+
+
   </style>
   
 
@@ -134,24 +178,20 @@
 @section('content')
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Home management</a>
-      </div>
+     
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
+   
 
-        
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><ion-icon name="stats"></ion-icon> estadisticas
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>
-
-
+         <div class="dropdown">
+          <button style="background-color: black" class="dropbtn"> <ion-icon name="stats"></ion-icon> estadisticas</button>
+          <div class="dropdown-content">
+           <a href="{{route('estadisticas.entregados')}}">domicilios entregados</a>
+          <a href="{{route('estadisticas.camino')}}">domicilios en camino</a>
+          <a href="{{route('estadisticas.aplazados')}}">domicilios aplazados</a>
+          <a href="{{route('estadisticas.proceso')}}">domicilios proceso</a>
+          </div>
+        </div>
        
 
       

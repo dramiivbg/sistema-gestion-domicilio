@@ -109,6 +109,11 @@
 
   <button type="submit" class="btn btn-primary btn-lg">enviar</button>
 
+
+  @endforeach
+
+  @endif
+
     </form>
         </div>
           </div>
@@ -123,10 +128,6 @@
     
   
   
-       
-  @endforeach
-
-    @endif
 
 
 
