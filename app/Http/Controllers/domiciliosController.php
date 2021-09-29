@@ -57,7 +57,7 @@ class domiciliosController extends Controller
 
         $domicilio = Domicilio::select('*')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->where('id_domiciliario', $id)->get();
 
-       $domicilios = $domicilio->where('estado', 'aplazados');
+       $domicilios = $domicilio->where('estado', 'aplazado');
 
         return view('domiciliario.aplazados', compact('domicilios'));
     
