@@ -106,7 +106,14 @@
     
     $domicilio->telefono
     
-    }}</p><br><br><br>
+    }}</p>
+    
+    <p>motivo: {{
+    
+        $domicilio->motivo
+        
+        }}</p>
+    <br><br><br>
   
 
   @endforeach
