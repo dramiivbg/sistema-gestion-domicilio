@@ -124,3 +124,8 @@ Route::post('domicilios-en-camino', [domiciliosController::class, 'domicilios_en
 
 Route::post('domicilios-aplazados', [domiciliosController::class, 'domicilios_aplazados'])->name('domiciliario.aplazados')->middleware('admin');
 
+
+
+Route::get('grafic-dias', [grafiController::class, 'viewReporteDia'])->name('estadisticas.reporteDia')->middleware('admin');
+
+Route::post('grafic-dias', [grafiController::class, 'totales_ReporteDia'])->name('reporteDia')->middleware('admin');
