@@ -83,6 +83,7 @@
           <a href="{{route('estadisticas.camino')}}">domicilios en camino</a>
           <a href="{{route('estadisticas.aplazados')}}">domicilios aplazados</a>
           <a href="{{route('estadisticas.proceso')}}">domicilios proceso</a>
+         
         </div>
       </div>
      
