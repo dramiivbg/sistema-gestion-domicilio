@@ -106,8 +106,33 @@
   
   
 
-  <button type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
+  <button id="boton" type="submit" class="btn btn-primary btn-lg">comentar inconveniente</button>
 
+
+  @php
+
+  $domicis = App\Models\Domicilio::select('*')->join('estados', 'domicilios.id','=','estados.id_domicilio')->join('retrasados','estados.id','=','retrasados.id_estado')->where('domicilios.id', $domicilio->id_domicilio)->get();
+      
+
+
+  @endphp
+
+@foreach ($domicis as $domici)
+
+@if (!empty($domici->motivo))
+    
+   <script>
+
+      document.getElementById('boton').style.display = 'none';
+     
+     </script> 
+   
+@endif
+    
+@endforeach
+
+
+  
        
   @endforeach
 
