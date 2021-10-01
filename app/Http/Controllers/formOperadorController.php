@@ -30,6 +30,8 @@ class formOperadorController extends Controller
             'rol' => request('rol')
         ]);
 
+        if(!empty($operador)){
+            
         $id = Operadore::find($operador->id);
 
       
@@ -42,7 +44,9 @@ class formOperadorController extends Controller
             'id_operador' => $id->id
         ]);
 
-        if($login){
+        }
+
+        if(!empty($login)){
 
         $url =   redirect()->route('auth.login');
 

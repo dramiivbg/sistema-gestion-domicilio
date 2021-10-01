@@ -47,7 +47,7 @@
 
    
   
-  <div class="flexp ">
+  <div id="div" class="flexp ">
     <div class="container">
       <div class="row">
           <div class="col-md-12">
@@ -62,9 +62,7 @@
   <br>
   
 
-  @if (!empty($domicilios))
-  
-  @foreach ($domicilios as $domicilio )
+
 
 
 
@@ -110,9 +108,34 @@
   <button type="submit" class="btn btn-primary btn-lg">enviar</button>
 
 
-  @endforeach
+  @php
 
-  @endif
+  $domicis = App\Models\Estado::where('id_domicilio', $domicilio->id_domicilio)->get();
+      
+
+  
+
+  @endphp
+
+  
+@foreach ($domicis as $domici)
+
+@if ($domici->estado == 'entregado' || $domici->estado == 'aplazado' )
+    
+   <script>
+
+      document.getElementById('div').style.display = 'none';
+    
+     
+     </script> 
+   
+@endif
+    
+@endforeach
+
+
+
+ 
 
     </form>
         </div>

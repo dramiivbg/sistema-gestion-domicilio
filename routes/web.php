@@ -77,8 +77,8 @@ Route::post('login', [loginController::class, 'logout'])->name('logout');
 
 Route::post('cambiar-estado', [pedidoController::class, 'cambiar_estado'])->name('cambiar-estado')->middleware('domiciliario');
 
-Route::post('register1', [formOperadorController::class, 'register'])->name('register1')->middleware('admin');
-Route::get('register1', [formOperadorController::class, 'register'])->name('register1')->middleware('admin');
+Route::post('register1', [formOperadorController::class, 'register'])->name('register1');
+Route::get('register1', [formOperadorController::class, 'register'])->name('register1');
 
 Route::post('register-pedido', [formPedidoController::class, 'registrar'])->name('domicilio')->middleware('admin');
     
@@ -129,3 +129,4 @@ Route::post('domicilios-aplazados', [domiciliosController::class, 'domicilios_ap
 Route::get('grafic-dias', [grafiController::class, 'viewReporteDia'])->name('estadisticas.reporteDia')->middleware('admin');
 
 Route::post('grafic-dias', [grafiController::class, 'totales_ReporteDia'])->name('reporteDia')->middleware('admin');
+

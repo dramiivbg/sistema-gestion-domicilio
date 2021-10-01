@@ -47,7 +47,7 @@
 
    
   
-  <div class="flexp ">
+  <div id="div" class="flexp ">
     <div class="container">
       <div class="row">
           <div class="col-md-12">
@@ -61,11 +61,11 @@
   <br>
   <br>
 
-  @if (!empty($domicilios))
+
 
   
       
-  @foreach ($domicilios as $domicilio )
+  
 
 
 
@@ -100,17 +100,42 @@
     }}</p>
   
   
-  <select name="estado"  >
+  <select id="select" name="estado"  >
 
     <option   value="en camino">camino</option>
   
   </select><br><br>
 
-  <button type="submit" class="btn btn-primary btn-lg">enviar</button>
+  <button id="boton" type="submit" class="btn btn-primary btn-lg">enviar</button>
 
-  @endforeach 
 
-  @endif  
+
+  @php
+
+  $domicis = App\Models\Estado::where('id_domicilio', $domicilio->id_domicilio)->get();
+      
+
+  
+
+  @endphp
+
+  
+@foreach ($domicis as $domici)
+
+@if ($domici->estado != 'en proceso')
+    
+   <script>
+
+      document.getElementById('div').style.display = 'none';
+    
+     
+     </script> 
+   
+@endif
+    
+@endforeach
+
+
 
     </form>
         </div>

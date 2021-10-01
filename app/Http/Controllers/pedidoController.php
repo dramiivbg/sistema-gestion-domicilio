@@ -117,17 +117,15 @@ public function edit_pedido(){
 
        foreach($domicilios as $domicilio){
 
-             if($domicilio->estado != 'en proceso'){
+             if($domicilio->estado == 'en proceso'){
 
-              unset($domicilios);
-
-              $domicilios = null;
+               return view('domicilio.pedidos', compact('domicilio'));
             
             }
        }
           
 
-           return view('domicilio.pedidos', compact('domicilios'));
+         
 
            
      }
@@ -143,33 +141,32 @@ public function edit_pedido(){
 
       
  
-       $domicilios = Domicilio::select('estados.id_domicilio','domicilios.num_pedido', 'compradores.direccion', 'compradores.telefono', 'estados.estado')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->groupBy('id_domicilio','estado')->where('id_domiciliario', $id['id'])->get();
+       $domicilios = Domicilio::select('estados.id_domicilio','domicilios.num_pedido', 'compradores.direccion', 'compradores.telefono', 'estados.estado')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente','=', 'clientes.nombre')->join('compradores', 'domicilios.id_comprador', '=', 'compradores.id')->where('id_domiciliario', $id['id'])->get();
 
     
 
        foreach($domicilios as $domicilio){
 
-             if($domicilio->estado == 'entregado' || $domicilio->estado == 'aplazado'){
+             if($domicilio->estado == 'en camino' ){
 
-              unset($domicilios);
-
-              $domicilios = null;
+               return view('domicilio.camino', compact('domicilio'));
+             
             
             }
 
 
        }
 
-       if(!empty($domicilios)){
+      //  if(!empty($domicilios)){
 
-       for($i = 0 ; $i < sizeof($domicilios); $i++){
+      //  for($i = 0 ; $i < sizeof($domicilios); $i++){
 
-         if($domicilios[$i]->estado == 'en proceso'){
+      //    if($domicilios[$i]->estado == 'en proceso'){
 
-            unset($domicilios[$i]);
-         }
-       }
-      }
+      //       unset($domicilios[$i]);
+      //    }
+      //  }
+      // }
           
 
            return view('domicilio.camino', compact('domicilios'));
