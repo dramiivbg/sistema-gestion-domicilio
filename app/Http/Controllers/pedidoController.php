@@ -75,7 +75,7 @@ public function edit_pedido(){
 
       $id1 =  request()->session()->all();
 
-      if(!empty($id1)){
+      if(!empty($id1['id'])){
    
 
       $domiciliario = Operadore::find($id1['id']);
@@ -409,16 +409,20 @@ foreach ($domicilios as $domicilio){
                  'id_estado' => $session['id_estado'],
                  'motivo' => request('motivo')]);
 
- if($retraso){
+ 
 
-$pedidos = Domicilio::select('domicilios.num_pedido','clientes.email')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente', '=', 'clientes.nombre')->where('estados.id', request('id_estado'))->get();
+$pedidos = Domicilio::select('domicilios.num_pedido','clientes.email','estados.id')->join('estados', 'domicilios.id','=', 'estados.id_domicilio')->join('clientes', 'domicilios.nombre_cliente', '=', 'clientes.nombre')->where('estados.id', $session['id_estado'])->get();
+
 
 foreach($pedidos as $pedido){
 
      $details =[
           'title' => 'pedido aplazado',
-          'body' => 'el pedido:'.$pedido->num_pedido.'  '.'fue aplazado por'.' '.$retraso->motivo
+          'body' => 'el pedido:'.$pedido->num_pedido.'  '.'fue aplazado por'.' '.request('motivo')
       ];
+
+      
+      
 
       Mail::to($pedido->email)->send(new email($details));
 
@@ -428,7 +432,7 @@ foreach($pedidos as $pedido){
    return redirect()->route('domicilio.aplazado');
       
     
- }
+ 
    }
    
 

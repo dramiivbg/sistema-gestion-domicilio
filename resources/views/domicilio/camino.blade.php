@@ -111,11 +111,11 @@
   @php
 
   $domicis = App\Models\Estado::where('id_domicilio', $domicilio->id_domicilio)->get();
-      
 
   
-
+      
   @endphp
+
 
   
 @foreach ($domicis as $domici)

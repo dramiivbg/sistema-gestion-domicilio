@@ -59,6 +59,8 @@ class domiciliosController extends Controller
 
        $domicilios = $domicilio->where('estado', 'aplazado');
 
+       
+
         return view('domiciliario.aplazados', compact('domicilios'));
     
 

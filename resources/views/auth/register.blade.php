@@ -104,7 +104,7 @@
                             <label for=""> roles</label>
                             <select  name="rol">
                                 <option value="domiciliario">domiciliario</option>
-                                <option value="admin" selected>admin</option>
+                                
                                 
                               </select><br>
                          

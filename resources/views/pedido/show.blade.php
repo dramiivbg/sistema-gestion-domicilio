@@ -126,7 +126,11 @@
     
 @endsection
 
+
+
+
 @section('content')
+
 
 
 <nav class="navbar navbar-inverse">
@@ -140,7 +144,8 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href=""><span class="glyphicon glyphicon-user"></span> Sr.{{$domiciliario->nombre_completo}}</a></li>
+        
+       
         <li><a href="{{route('logout')}}"> <span class="glyphicon glyphicon-log-out"></span> logout</a></li>
       </ul>
     </div>

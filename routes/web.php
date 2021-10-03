@@ -36,7 +36,6 @@ Route::get('/', [homeController::class, 'home'])->name('home');
 
 
 
-
 Route::post('auth', [formLoginController::class, 'login'])->name('auth1'); 
 
 
@@ -50,7 +49,7 @@ Route::post('edit-operador', [operadorController::class, 'edit_operador'])->name
 
 
 
-Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware('domiciliario');
+Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware(['domiciliario', 'verified']);
 
 Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('domicilio.pedidos')->middleware('domiciliario');
 

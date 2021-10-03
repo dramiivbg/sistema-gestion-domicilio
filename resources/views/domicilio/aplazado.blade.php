@@ -68,7 +68,7 @@
 
   <p> <strong> <br> 
     
-    <input type="text" name="id_estado" value="{{$domicilio->id}}" readonly>
+    <input style="display: none" type="text" name="id_estado" value="{{$domicilio->id}}" readonly>
     
     </strong>
     </p>
@@ -124,6 +124,7 @@
    <script>
 
       document.getElementById('boton').style.display = 'none';
+      
      
      </script> 
    

@@ -34,7 +34,7 @@
         <div class="dropdown">
           <button style="background-color: black; " class="dropbtn"> <ion-icon name="stats"></ion-icon> estadisticas</button>
           <div class="dropdown-content">
-            <a href="{{route('estadisticas.entregados')}}">domicilios entregados</a>
+            <a href="{{route('estadisticas.reporteDia')}}">domicilios por dias</a>
             <a href="{{route('estadisticas.camino')}}">domicilios en camino</a>
             <a href="{{route('estadisticas.aplazados')}}">domicilios aplazados</a>
             <a href="{{route('estadisticas.proceso')}}">domicilios proceso</a>
