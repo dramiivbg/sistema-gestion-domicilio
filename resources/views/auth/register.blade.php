@@ -106,6 +106,7 @@
                                 <option value="domiciliario">domiciliario</option>
                                 
                                 
+                                
                               </select><br>
                          
                               {!! $errors->first('rol','<small>:message</small><br>') !!}

@@ -49,7 +49,7 @@ Route::post('edit-operador', [operadorController::class, 'edit_operador'])->name
 
 
 
-Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware(['domiciliario', 'verified']);
+Route::get('home-domiciliario', [pedidoController::class, 'home_domiciliario'])->name('pedido.show')->middleware('domiciliario');
 
 Route::get('pedidos', [pedidoController::class, 'ver_pedidos'])->name('domicilio.pedidos')->middleware('domiciliario');
 
